@@ -8,9 +8,8 @@ Add-Type -AssemblyName System.Windows.Forms
 $rawUrl = "https://raw.githubusercontent.com/httperrycodes-debug/idk/refs/heads/main/Haddaway%20-%20What%20Is%20Love%20(Official%204K%20Video).mp3"
 $outputPath = "$env:TEMP\whatislove.mp3"
 
-Write-Host "Downloading track..."
 Invoke-WebRequest -Uri $rawUrl -OutFile $outputPath
-Write-Host "Downloaded to $outputPath"
+
 
 # --- Set system volume to 100% ---
 $shell = New-Object -ComObject WScript.Shell
@@ -20,14 +19,14 @@ for ($i = 0; $i -lt 50; $i++) {
     $shell.SendKeys([char]175)
     Start-Sleep -Milliseconds 20
 }
-Write-Host "Volume set to maximum."
+
 
 # --- Play the MP3 ---
 $player = New-Object System.Windows.Media.MediaPlayer
 $player.Open([Uri]$outputPath)
 $player.Volume = 1.0
 $player.Play()
-Write-Host "Playing... Press + to stop and quit."
+
 
 # --- Volume lock loop + kill switch ---
 while ($true) {
